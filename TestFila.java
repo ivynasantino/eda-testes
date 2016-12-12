@@ -99,12 +99,46 @@ public class TestFila {
 	}
 	
 	@Test
-	public void testRandom() throws QueueOverflowException {
-		// random = [2,4,5,7,9]
+	public void testRandom() throws Exception {
 		assertTrue(random.isEmpty());
 		
 		random.enqueue(new Integer(9));
+		assertEquals(random.head(), new Integer(9));
 		
+		// random = [9]
+		
+		random.enqueue(new Integer(7));
+		assertEquals(random.head(), new Integer(9));
+		
+		random.enqueue(new Integer(5));
+		random.enqueue(new Integer(4));
+		
+		assertFalse(random.isFull());
+		
+		random.enqueue(new Integer(2));
+		
+		//random = [9,7,5,4,2]
+		
+		assertTrue(random.isFull());
+		assertEquals(random.dequeue(), new Integer(9));
+		//random = [7,5,4,2]
+		
+		assertEquals(random.head(), new Integer(7));
+		assertEquals(random.dequeue(), new Integer(7));
+		assertEquals(random.dequeue(), new Integer(5));
+		assertEquals(random.dequeue(), new Integer(4));
+		
+		assertFalse(random.isEmpty());
+		assertEquals(random.dequeue(), new Integer(2));
+		
+		//random = []
+		assertTrue(random.isEmpty());
+		
+		random.enqueue(new Integer(3));
+		random.enqueue(new Integer(2));
+		//random = [3,2]
+		
+		assertEquals(random.head(), new Integer(3));
 	}
 	
 	
