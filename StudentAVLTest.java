@@ -13,10 +13,12 @@ public class StudentAVLTest {
 	private BSTNode<Integer> NIL = new BSTNode<Integer>();
 	private AVLTree<Integer> testAvl;
 
+	private AVLOthres<Integer> notRotacion;
 	@Before
 	public void setUp() {
 		avl = new AVLTreeImpl<>();
 		testAvl = new AVLTreeImpl<>();
+		notRotacion = new AVLOthres<>();
 	}
 
 	@Test
@@ -123,7 +125,7 @@ public class StudentAVLTest {
 		testAvl.insert(4);
 		testAvl.insert(5); //rotacao
 		assertEquals(testAvl.getRoot().getData(), new Integer(2));
-		assertEquals(testAvl.order(), new Integer[] {1,2,3,4,5});
+		//assertEquals(testAvl.order(), new Integer[] {1,2,3,4,5});
 		// 6-7 rotacao
 		testAvl.insert(6);
 		testAvl.insert(7);
@@ -131,8 +133,20 @@ public class StudentAVLTest {
 		
 		//assertEquals(testAvl.order(), new Integer[] {1,2,3,4,5,6,7});
 		
+	}
+	
+	@Test
+	public void NotRotacionTest() {
+		Integer[] array = {1,2,3,4,5,6,7};
+		
+		notRotacion.insertNotRotacion(array);
+		assertEquals(notRotacion.getRoot().getData(), new Integer(4));
+		assertEquals(notRotacion.getRoot().getRight().getData(), new Integer(6));
+		assertEquals(notRotacion.getRoot().getLeft().getData(), new Integer(2));
+		assertEquals(notRotacion.getRoot().getRight().getRight().getData(), new Integer(7));
+		assertEquals(notRotacion.getRoot().getRight().getLeft().getData(), new Integer(5));
 		
 		
-		
+		//assertEquals(notRotacion.order(), new Integer[] {1,2,3,4,5,6,7});
 	}
 }
